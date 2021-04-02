@@ -1,11 +1,10 @@
-#
-# 1c, 10c, 25c
-#
+# Inputs are 1c, 10c, and 25c
+# it returns like below for each cent value.
 # MakeChange(10) == 1 ( 1 x 10c )
 # MakeChange(100) == 4 ( 4 x 25c )
 # MakeChange(11) == 2 ( 1x10c + 1x1c )
 # MakeChange(3) = 3
-# add all quo from each step
+# add all quotient from each step for the return value.
 
 function MakeChange() {
     output=""
