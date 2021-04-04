@@ -5,17 +5,18 @@ function delete_act_tags() {
         echo "[Usage]: $0 acr_name subscription_id"
         return 1
     fi
-
+    acr_name=$1s
+    subscription_id=$2
     # It supports multiple acr_name with parallelism.
     az acr repository list --name $acr_name --output table --subscription $subscription_id > $acr_name_delete_acr_target_names.txt
 
     # Removed the first 2 lines from the original output
-    sed -i "1,2d" delete_acr_target_names.txt
+    sed -i "1,2d" $acr_name_delete_acr_target_names.txt
 
     # Create the original copy for recovery purpose
     cp $acr_name_delete_acr_target_names.txt $acr_name_delete_acr_target_names.original
 
-    # Pick up a container name from the delete_acr_target_names.txt file
+    # Pick up a container name from the $acr_name_delete_acr_target_names.txt file
     while IFS= read -r repoName
     do
         echo "ACR repository name: $repoName"
@@ -28,10 +29,9 @@ function delete_act_tags() {
             echo $tagline is removed from $repoName
         done < "$repoName.txt"
         # delete the first line after job done
-        sed -i "1d" delete_acr_target_names.txt
+        sed -i "1d" $acr_name_delete_acr_target_names.txt
 
-done < "$acr_name_delete_acr_target_names.txt"
+    done < "$acr_name_delete_acr_target_names.txt"
 }
 
 delete_act_tags $1 $2
-
