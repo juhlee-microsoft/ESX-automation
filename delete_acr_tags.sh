@@ -35,4 +35,3 @@ function delete_act_tags() {
 }
 
 delete_act_tags $1 $2
-#delete_act_tags "skylinkintacr" "851bc778-eff0-4350-96bd-62f3c6363e55"
