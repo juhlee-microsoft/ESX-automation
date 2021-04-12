@@ -35,7 +35,8 @@ function delete_act_tags() {
             then
                 availability=30
             else
-                availability=90
+                # Keep the else-block for future change if we want to manage the official image build
+                continue
             fi
             limitdate=$(date +%Y-%m-%d -d "$availability days ago")
             _timestamp=$(date -d $(echo $timestamp | cut -d 'T' -f 1) +'%Y-%m-%d')
