@@ -1,10 +1,4 @@
 function delete_act_tags() {
-
-    if [ $# -lt 2 ]; then
-        echo "Error - missing arguments"
-        echo "[Usage]: $0 acr_name subscription_id"
-        return 1
-    fi
     acr_name=$1s
     subscription_id=$2
     # It supports multiple acr_name with parallelism.
@@ -54,5 +48,11 @@ function delete_act_tags() {
 
     done < "$acr_name_delete_acr_target_names.txt"
 }
+
+if [ $# -lt 2 ]; then
+    echo "Error - missing arguments"
+    echo "[Usage]: $0 acr_name subscription_id"
+    return 1
+fi
 
 delete_act_tags $1 $2
