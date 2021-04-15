@@ -11,7 +11,7 @@ backup_acr_name="$4"
 # expect failure
 ret=$(az acr repository show-tags --name $acr_name --repository $repo_name --orderby time_asc -o tsv --detail | grep $missing_tag)
 
-if [[ !$ret ]]; then
+if [[ -z "$ret" ]]; then
     echo "Verified that the image not found in $acr_name. Proceed the recovery process."
 else
     echo "Found the image in $acr_name. Stop here."
@@ -45,7 +45,7 @@ echo "Pushged the new tag to $acr_name"
 $ret=$(az acr repository show-tags --name $acr_name --repository $repo_name --orderby time_asc -o tsv --detail | grep $missing_tag)
 
 if [[ $ret ]]; then
-    echo "Verified that the new image in $acr_name successfully."
+    echo "Verified that the new image in $acr_name successfully. Recovery successful."
     echo $ret
 else
     echo "Not found the image still. Recovery failed."
