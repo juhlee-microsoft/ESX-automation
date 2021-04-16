@@ -1,7 +1,13 @@
 #!/bin/bash
 # This script needs to docker login in advance.
 
-set -euo pipefail
+#set -euo pipefail
+
+if [ $# -lt 4 ]; then
+    echo "Error - missing arguments"
+    echo "[Usage]: $0 acr_repo_name missing_tag acr_name backup_acr_name"
+    exit 1
+fi
 
 repo_name="$1"
 missing_tag="$2"
@@ -12,7 +18,7 @@ backup_acr_name="$4"
 ret=$(az acr repository show-tags --name $acr_name --repository $repo_name --orderby time_asc -o tsv --detail | grep $missing_tag)
 
 if [[ -z "$ret" ]]; then
-    echo "Verified that the image not found in $acr_name. Proceed the recovery process."
+    echo "Verified that the image is missing in $acr_name. Proceed the recovery process."
 else
     echo "Found the image in $acr_name. Stop here."
     echo $ret
