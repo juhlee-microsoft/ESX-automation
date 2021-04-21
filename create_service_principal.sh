@@ -37,8 +37,8 @@ function create_sp() {
 
 if [ $# -lt 2 ]; then
     echo "Error - missing arguments"
-    echo "[Usage]: $0 new_service_principal_display_name(s) subscription_id"
-    echo "new_service_principal_display_name(s) could be a list of strings"
+    echo "[Usage]: $0 new_service_principal_display_name(s) subscription_id."
+    echo "new_service_principal_display_name(s) could be a list of strings."
     exit 1
 fi
 
